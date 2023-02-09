@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.douzone.jblog.security.Auth;
 import com.douzone.jblog.service.BlogService;
 import com.douzone.jblog.service.CategoryService;
 import com.douzone.jblog.service.FileuploadService;
@@ -67,6 +68,7 @@ public class BlogController {
 		return "blog/main";
 	}
 
+	@Auth
 	@RequestMapping(value = "/{id}/admin/basic", method = RequestMethod.GET)
 	public String adminBasic(@PathVariable("id") String id, Model model) {
 		BlogVo blogVo = blogService.getBlog(id);
@@ -74,6 +76,7 @@ public class BlogController {
 		return "blog/admin-basic";
 	}
 
+	@Auth
 	@RequestMapping(value = "/{id}/admin/basic", method = RequestMethod.POST)
 	public String adminBasic(@PathVariable("id") String id, @RequestParam("title") String title,
 			@RequestParam("logo-file") MultipartFile file, Model model) {
@@ -88,6 +91,7 @@ public class BlogController {
 		return "blog/admin-basic";
 	}
 
+	@Auth
 	@RequestMapping(value = "/{id}/admin/category", method = RequestMethod.GET)
 	public String adminCategory(@PathVariable("id") String id, Model model) {
 		BlogVo blogVo = blogService.getBlog(id);
@@ -98,6 +102,7 @@ public class BlogController {
 		return "blog/admin-category";
 	}
 
+	@Auth
 	@RequestMapping(value = "/{id}/admin/category", method = RequestMethod.POST)
 	public String adminCategory(@PathVariable("id") String id, @RequestParam("name") String name, Model model) {
 		BlogVo blogVo = blogService.getBlog(id);
@@ -107,12 +112,14 @@ public class BlogController {
 		return "redirect:/jblog/" + id + "/admin/category";
 	}
 
+	@Auth
 	@RequestMapping(value = "/{id}/admin/category/delete/{no}")
 	public String deleteCategory(@PathVariable("id") String id, @PathVariable("no") Long no) {
 		categoryService.removeCategory(no);
 		return "redirect:/jblog/" + id + "/admin/category";
 	}
 
+	@Auth
 	@RequestMapping(value = "/{id}/admin/write", method = RequestMethod.GET)
 	public String writeCategory(@PathVariable("id") String id, Model model) {
 		BlogVo blogVo = blogService.getBlog(id);
@@ -123,6 +130,7 @@ public class BlogController {
 		return "blog/admin-write";
 	}
 	
+	@Auth
 	@RequestMapping(value = "/{id}/admin/write", method = RequestMethod.POST)
 	public String writeCategory(
 			@PathVariable("id") String id, PostVo postVo, Model model) {
