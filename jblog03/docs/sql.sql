@@ -19,6 +19,10 @@ insert into category values(null, 'category4', 'testId');
 
 select no from category where id = 'testId' order by no asc limit 0, 1;
 
+select * 
+			from category 
+			where id = 'testId'
+			order by no asc;
 
 select * from post order by category_no desc, no desc;
 insert into post values(null, 'testPost1', 'testContents1', now(), 8);
@@ -50,3 +54,4 @@ select a.no as no, a.name as name, count(b.no) as postCount
 select no, name, (select count(*) from post where category_no = c.no) as postCount 
 from category c where id = 'testId';
             
+delete from category where no = 15;
