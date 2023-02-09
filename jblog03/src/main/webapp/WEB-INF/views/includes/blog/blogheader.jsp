@@ -15,7 +15,7 @@
 					<li><a href="${pageContext.request.contextPath }/user/logout">로그아웃</a></li>
 					<li><a href="${pageContext.request.contextPath }/jblog/${authUser.id }/admin/basic">블로그 관리</a></li>
 					<li><a href="${pageContext.request.contextPath }">홈</a></li>
-					<li>${authUser.name }님의 블로그</li>
+					<li><a href="${pageContext.request.contextPath }/jblog/${authUser.id}">${authUser.name }님의 블로그</a></li>
 				</c:otherwise>
 			</c:choose>
 			</ul>

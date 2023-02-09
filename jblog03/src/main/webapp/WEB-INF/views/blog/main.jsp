@@ -11,7 +11,7 @@
 </head>
 <body>
 	<div id="container">
-		<c:import url="/WEB-INF/views/includes/adminMenu.jsp"></c:import>
+		<c:import url="/WEB-INF/views/includes/blog/blogheader.jsp"></c:import>
 		<div id="wrapper">
 			<div id="content">
 				<div class="blog-content">
@@ -44,11 +44,7 @@
 			</ul>
 		</div>
 		
-		<div id="footer">
-			<p>
-				<strong>${blogVo.title }</strong> is powered by JBlog (c)2016
-			</p>
-		</div>
+		<c:import url="/WEB-INF/views/includes/blog/blogfooter.jsp"></c:import>
 	</div>
 </body>
 </html>
