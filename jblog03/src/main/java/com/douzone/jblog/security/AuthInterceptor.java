@@ -42,9 +42,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 		}
 		// split 이후에 [숫자]를 사용하면 해당하는 순서의 값만 가져온다.
 		String id = request.getRequestURI().split("/")[3];
-		System.out.println(id);
 		String authId = authUser.getId();
-		System.out.println(authId);
 		
 		if (id.equals(authId) == false) {
 			response.sendRedirect(request.getContextPath());

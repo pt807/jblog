@@ -37,22 +37,24 @@ public class BlogController {
 	private FileuploadService fileuploadService;
 
 	@RequestMapping({ "/{id}", "/{id}/{categoryNo}", "/{id}/{categoryNo}/{postNo}" })
-	public String index(
-			@PathVariable("id") String id, 
-			@PathVariable("categoryNo") Optional<Long> categoryNo,
+	public String index(@PathVariable("id") String id, @PathVariable("categoryNo") Optional<Long> categoryNo,
 			@PathVariable("postNo") Optional<Long> postNo, Model model) {
 		Long categoryNum = 0L;
-		Long postNum = 1L;
+		Long postNum = 0L;
 
+		// 다 있을때
 		if (postNo.isPresent()) {
 			categoryNum = categoryNo.get();
 			postNum = postNo.get();
+	    // categoryNo 까지 있을때
 		} else if (categoryNo.isPresent()) {
 			categoryNum = categoryNo.get();
+		// 없을때 
 		} else {
-			// 모든값이 있을때
 			categoryNum = categoryService.getcategoryNo(id);
+			postNum = postService.getMinNo(categoryNum);
 		}
+		postNum = postService.getMinNo(categoryNum);
 
 		PostVo post = postService.getPost(categoryNum, postNum);
 		BlogVo blogVo = blogService.getBlog(id);
@@ -64,6 +66,7 @@ public class BlogController {
 		model.addAttribute("postList", postList);
 		model.addAttribute("categoryList", categoryList);
 		model.addAttribute("categoryNo", categoryNum);
+		model.addAttribute("postNum", postNum);
 
 		return "blog/main";
 	}
@@ -124,19 +127,18 @@ public class BlogController {
 	public String writeCategory(@PathVariable("id") String id, Model model) {
 		BlogVo blogVo = blogService.getBlog(id);
 		model.addAttribute("blogVo", blogVo);
-		
+
 		List<CategoryVo> categoryVo = categoryService.getcategoryList(id);
 		model.addAttribute("categoryVo", categoryVo);
 		return "blog/admin-write";
 	}
-	
+
 	@Auth
 	@RequestMapping(value = "/{id}/admin/write", method = RequestMethod.POST)
-	public String writeCategory(
-			@PathVariable("id") String id, PostVo postVo, Model model) {
-		
+	public String writeCategory(@PathVariable("id") String id, PostVo postVo, Model model) {
+
 		postService.addPost(postVo);
-		
+
 		return "redirect:/jblog/" + id + "/admin/category";
 	}
 }

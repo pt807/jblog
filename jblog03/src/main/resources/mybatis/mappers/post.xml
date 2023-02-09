@@ -5,7 +5,7 @@
 
 	<select id="findByList" parameterType="long" resultType="postvo">
 		<![CDATA[
-			select no, title, contents, reg_date, category_no as categoryNo 
+			select no, title, contents, reg_date, category_no
 			from post 
 			where category_no = #{categoryNo }
 			order by no desc;
@@ -26,4 +26,12 @@
 			values(null, #{title }, #{contents }, now(), #{categoryNo });
 		]]>
 	</insert>
+	
+	<select id="findMinNo" parameterType="long" resultType="long">
+		<![CDATA[
+			select min(no) as no 
+			from post 
+			where category_no = #{no }
+		]]>
+	</select>
 </mapper>

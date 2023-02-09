@@ -25,4 +25,8 @@ public class PostService {
 		postRepository.insertPost(postVo);
 	}
 
+	public Long getMinNo(Long no) {
+		return postRepository.findMinNo(no);
+	}
+
 }

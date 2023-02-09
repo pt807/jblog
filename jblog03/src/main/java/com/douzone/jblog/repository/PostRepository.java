@@ -30,4 +30,8 @@ public class PostRepository {
 		sqlSession.insert("post.insertPost", postVo);
 	}
 
+	public Long findMinNo(Long no) {
+		return sqlSession.selectOne("post.findMinNo", no);
+	}
+
 }
