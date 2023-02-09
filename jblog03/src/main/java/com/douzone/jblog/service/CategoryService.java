@@ -20,5 +20,17 @@ public class CategoryService {
 	public Long getcategoryNo(String id) {
 		return categoryRepository.findNo(id);
 	}
+
+	public void addCategory(String id, String name) {
+		categoryRepository.insertCategory(id, name);
+	}
+
+	public List<CategoryVo> getcategoryListAndPostCount(String id) {
+		return categoryRepository.findListAndPostCount(id);
+	}
+
+	public void removeCategory(Long no) {
+		categoryRepository.deleteCategory(no);
+	}
 	
 }

@@ -26,4 +26,8 @@ public class PostRepository {
 		return sqlSession.selectOne("post.findPost", map);
 	}
 
+	public void insertPost(PostVo postVo) {
+		sqlSession.insert("post.insertPost", postVo);
+	}
+
 }

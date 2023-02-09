@@ -19,4 +19,11 @@
 			where no = #{no } and category_no = #{categoryNo }
 		]]>
 	</select>
+	
+	<insert id="insertPost" parameterType="postvo">
+		<![CDATA[
+			insert into post 
+			values(null, #{title }, #{contents }, now(), #{categoryNo });
+		]]>
+	</insert>
 </mapper>

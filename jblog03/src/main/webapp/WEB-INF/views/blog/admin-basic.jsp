@@ -11,14 +11,10 @@
 </head>
 <body>
 	<div id="container">
-		<c:import url="/WEB-INF/views/includes/adminMenu.jsp"></c:import>
+		<c:import url="/WEB-INF/views/includes/blog/blogheader.jsp"></c:import>
 		<div id="wrapper">
 			<div id="content" class="full-screen">
-				<ul class="admin-menu">
-					<li class="selected">기본설정</li>
-					<li><a href="">카테고리</a></li>
-					<li><a href="">글작성</a></li>
-				</ul>
+				<c:import url="/WEB-INF/views/includes/admin/adminmenu.jsp"></c:import>
 				<form action="${pageContext.request.contextPath}/jblog/${authUser.id }/admin/basic" method="post" enctype="multipart/form-data">
 	 		      	<table class="admin-config">
 			      		<tr>
@@ -41,11 +37,7 @@
 				</form>
 			</div>
 		</div>
-		<div id="footer">
-			<p>
-				<strong>Spring 이야기</strong> is powered by JBlog (c)2016
-			</p>
-		</div>
+		<c:import url="/WEB-INF/views/includes/blog/blogfooter.jsp"></c:import>
 	</div>
 </body>
 </html>

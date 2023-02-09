@@ -21,4 +21,8 @@ public class PostService {
 		return postRepository.findPost(categoryNum, postNum);
 	}
 
+	public void addPost(PostVo postVo) {
+		postRepository.insertPost(postVo);
+	}
+
 }

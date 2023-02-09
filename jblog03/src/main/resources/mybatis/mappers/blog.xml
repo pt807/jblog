@@ -9,20 +9,31 @@
 		values(#{id }, '기본 제목입니다.', '/assets/images/spring-logo.jpg')
 		]]>
 	</insert>
-	
+
 	<select id="findBlog" parameterType="string" resultType="blogvo">
 		<![CDATA[
-			select * 
-			from blog 
-			where id = #{id };
+		select * 
+		from blog 
+		where id = #{id };
 		]]>
 	</select>
-	
+
 	<update id="updateImage" parameterType="map">
-		<![CDATA[
+		<choose>
+			<when test="profile != null">
+			<![CDATA[
 	    	update blog 
 	    	set title = #{title }, profile = #{profile } 
 	    	where id = #{id }
-		]]>
+			]]>
+			</when>
+			<otherwise>
+			<![CDATA[
+		    update blog 
+	    	set title = #{title }
+	    	where id = #{id }
+			]]>
+			</otherwise>
+		</choose>
 	</update>
 </mapper>

@@ -8,7 +8,7 @@
 			select * 
 			from category 
 			where id = #{id } 
-			order by no asc;
+			order by no asc
 		]]>
 	</select>
 	
@@ -18,7 +18,29 @@
 			from category 
 			where id = #{id } 
 			order by no asc
-			limit 0, 1;
+			limit 0, 1
 		]]>
 	</select>
+	
+	<insert id="insertCategory" parameterType="map">
+		<![CDATA[
+			insert into category 
+			values(null, #{name }, #{id })
+		]]>
+	</insert>
+	
+	<select id="findListAndPostCount" parameterType="string" resultType="categoryvo">
+		<![CDATA[
+			select no, name, (select count(*) from post where category_no = c.no) as postCount 
+			from category c where id = #{id };
+		]]>
+	</select>
+	
+	<delete id="deleteCategory" parameterType="long">
+		<![CDATA[
+			delete 
+			from category 
+			where no = #{no }
+		]]>
+	</delete>
 </mapper>

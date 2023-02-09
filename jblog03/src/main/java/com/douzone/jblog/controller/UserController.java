@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.douzone.jblog.service.BlogService;
+import com.douzone.jblog.service.CategoryService;
 import com.douzone.jblog.service.UserService;
 import com.douzone.jblog.vo.UserVo;
 
@@ -17,6 +18,9 @@ public class UserController {
 	
 	@Autowired
 	private BlogService blogService;
+	
+	@Autowired
+	private CategoryService categoryService;
 
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
 	public String join() {
@@ -27,6 +31,7 @@ public class UserController {
 	public String join(UserVo userVo) {
 		userService.join(userVo);
 		blogService.addBlog(userVo.getId());
+		categoryService.addCategory(userVo.getId(), "기본 카테고리");
 		return "user/joinsuccess";
 	}
 
