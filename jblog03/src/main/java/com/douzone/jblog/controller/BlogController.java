@@ -71,7 +71,6 @@ public class BlogController {
 		model.addAttribute("postList", postList);
 		model.addAttribute("categoryList", categoryList);
 		model.addAttribute("categoryNo", categoryNum);
-		model.addAttribute("postNum", postNum);
 
 		return "blog/main";
 	}
