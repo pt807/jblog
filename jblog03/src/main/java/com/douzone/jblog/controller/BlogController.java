@@ -41,7 +41,12 @@ public class BlogController {
 			@PathVariable("postNo") Optional<Long> postNo, Model model) {
 		Long categoryNum = 0L;
 		Long postNum = 0L;
-
+		
+		List<BlogVo> blogList = blogService.getBlogList();
+		if(! blogList.contains(id)) {
+			return "error/404";
+		}
+		
 		// 다 있을때
 		if (postNo.isPresent()) {
 			categoryNum = categoryNo.get();

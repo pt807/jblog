@@ -1,6 +1,7 @@
 package com.douzone.jblog.repository;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -28,6 +29,10 @@ public class BlogRepository {
 		map.put("profile", url);
 		map.put("title", title);
 		sqlSession.insert("blog.updateImage" ,map);
+	}
+
+	public List<BlogVo> findAll() {
+		return sqlSession.selectList("blog.findAll");
 	}
 
 }

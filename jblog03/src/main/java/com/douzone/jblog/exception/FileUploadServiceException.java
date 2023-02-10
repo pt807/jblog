@@ -1,4 +1,4 @@
-package com.douzone.jblog.service;
+package com.douzone.jblog.exception;
 
 public class FileUploadServiceException extends RuntimeException {
 

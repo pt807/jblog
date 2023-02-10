@@ -14,7 +14,14 @@
 		<![CDATA[
 		select * 
 		from blog 
-		where id = #{id };
+		where id = #{id }
+		]]>
+	</select>
+	
+	<select id="findAll" resultType="blogvo">
+		<![CDATA[
+		select * 
+		from blog 
 		]]>
 	</select>
 

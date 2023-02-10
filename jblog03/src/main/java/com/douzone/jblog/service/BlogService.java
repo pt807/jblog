@@ -1,5 +1,7 @@
 package com.douzone.jblog.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,5 +25,8 @@ public class BlogService {
 		blogRepository.updateImage(id, url, title);
 	}
 	
+	public List<BlogVo> getBlogList(){
+		return blogRepository.findAll();
+	}
 	
 }
