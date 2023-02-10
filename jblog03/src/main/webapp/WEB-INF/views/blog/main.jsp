@@ -39,7 +39,7 @@
 			<h2>카테고리</h2>
 			<ul>
 				<c:forEach items="${categoryList }" var="vo" varStatus="status">
-				<li><a href="${pageContext.request.contextPath}/${requestScope.id }/${vo.no }/${postNum }">${vo.name }</a></li>
+				<li><a href="${pageContext.request.contextPath}/${requestScope.id }/${vo.no }">${vo.name }</a></li>
 				</c:forEach>
 			</ul>
 		</div>

@@ -18,9 +18,9 @@
 		]]>
 	</select>
 	
-	<select id="findAll" resultType="blogvo">
+	<select id="findAll" resultType="string">
 		<![CDATA[
-		select * 
+		select id
 		from blog 
 		]]>
 	</select>

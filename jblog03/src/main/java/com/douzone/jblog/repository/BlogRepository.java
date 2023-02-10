@@ -31,7 +31,7 @@ public class BlogRepository {
 		sqlSession.insert("blog.updateImage" ,map);
 	}
 
-	public List<BlogVo> findAll() {
+	public List<String> findAll() {
 		return sqlSession.selectList("blog.findAll");
 	}
 

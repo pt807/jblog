@@ -42,7 +42,7 @@ public class BlogController {
 		Long categoryNum = 0L;
 		Long postNum = 0L;
 		
-		List<BlogVo> blogList = blogService.getBlogList();
+		List<String> blogList = blogService.getBlogList();
 		if(! blogList.contains(id)) {
 			return "error/404";
 		}
@@ -54,13 +54,12 @@ public class BlogController {
 		// categoryNo 까지 있을때
 		} else if (categoryNo.isPresent()) {
 			categoryNum = categoryNo.get();
+			postNum = postService.getMinNo(categoryNum);
 		// 없을때
 		} else {
 			categoryNum = categoryService.getcategoryNo(id);
 			postNum = postService.getMinNo(categoryNum);
 		}
-//		if()
-//		postNum = postService.getMinNo(categoryNo.get());
 
 		PostVo post = postService.getPost(categoryNum, postNum);
 		BlogVo blogVo = blogService.getBlog(id);

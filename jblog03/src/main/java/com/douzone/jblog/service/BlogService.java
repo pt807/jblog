@@ -25,7 +25,7 @@ public class BlogService {
 		blogRepository.updateImage(id, url, title);
 	}
 	
-	public List<BlogVo> getBlogList(){
+	public List<String> getBlogList(){
 		return blogRepository.findAll();
 	}
 	

@@ -8,7 +8,7 @@
 			select no, title, contents, reg_date, category_no
 			from post 
 			where category_no = #{categoryNo }
-			order by no desc;
+			order by no desc
 		]]>
 	</select>
 	
@@ -23,7 +23,7 @@
 	<insert id="insertPost" parameterType="postvo">
 		<![CDATA[
 			insert into post 
-			values(null, #{title }, #{contents }, now(), #{categoryNo });
+			values(null, #{title }, #{contents }, now(), #{categoryNo })
 		]]>
 	</insert>
 	
