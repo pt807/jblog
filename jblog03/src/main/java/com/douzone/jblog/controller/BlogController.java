@@ -21,7 +21,7 @@ import com.douzone.jblog.vo.BlogVo;
 import com.douzone.jblog.vo.CategoryVo;
 import com.douzone.jblog.vo.PostVo;
 
-@RequestMapping("/jblog")
+@RequestMapping("/{id:(?!assets).*}")
 @Controller
 public class BlogController {
 	@Autowired
@@ -36,7 +36,7 @@ public class BlogController {
 	@Autowired
 	private FileuploadService fileuploadService;
 
-	@RequestMapping({ "/{id}", "/{id}/{categoryNo}", "/{id}/{categoryNo}/{postNo}" })
+	@RequestMapping({ "", "/{categoryNo}", "/{categoryNo}/{postNo}" })
 	public String index(@PathVariable("id") String id, @PathVariable("categoryNo") Optional<Long> categoryNo,
 			@PathVariable("postNo") Optional<Long> postNo, Model model) {
 		Long categoryNum = 0L;
@@ -46,15 +46,16 @@ public class BlogController {
 		if (postNo.isPresent()) {
 			categoryNum = categoryNo.get();
 			postNum = postNo.get();
-	    // categoryNo 까지 있을때
+		// categoryNo 까지 있을때
 		} else if (categoryNo.isPresent()) {
 			categoryNum = categoryNo.get();
-		// 없을때 
+		// 없을때
 		} else {
 			categoryNum = categoryService.getcategoryNo(id);
 			postNum = postService.getMinNo(categoryNum);
 		}
-		postNum = postService.getMinNo(categoryNum);
+//		if()
+//		postNum = postService.getMinNo(categoryNo.get());
 
 		PostVo post = postService.getPost(categoryNum, postNum);
 		BlogVo blogVo = blogService.getBlog(id);
@@ -72,7 +73,7 @@ public class BlogController {
 	}
 
 	@Auth
-	@RequestMapping(value = "/{id}/admin/basic", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/basic", method = RequestMethod.GET)
 	public String adminBasic(@PathVariable("id") String id, Model model) {
 		BlogVo blogVo = blogService.getBlog(id);
 		model.addAttribute("blogVo", blogVo);
@@ -80,7 +81,7 @@ public class BlogController {
 	}
 
 	@Auth
-	@RequestMapping(value = "/{id}/admin/basic", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/basic", method = RequestMethod.POST)
 	public String adminBasic(@PathVariable("id") String id, @RequestParam("title") String title,
 			@RequestParam("logo-file") MultipartFile file, Model model) {
 
@@ -95,7 +96,7 @@ public class BlogController {
 	}
 
 	@Auth
-	@RequestMapping(value = "/{id}/admin/category", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/category", method = RequestMethod.GET)
 	public String adminCategory(@PathVariable("id") String id, Model model) {
 		BlogVo blogVo = blogService.getBlog(id);
 		model.addAttribute("blogVo", blogVo);
@@ -106,24 +107,24 @@ public class BlogController {
 	}
 
 	@Auth
-	@RequestMapping(value = "/{id}/admin/category", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/category", method = RequestMethod.POST)
 	public String adminCategory(@PathVariable("id") String id, @RequestParam("name") String name, Model model) {
 		BlogVo blogVo = blogService.getBlog(id);
 		model.addAttribute("blogVo", blogVo);
 
 		categoryService.addCategory(id, name);
-		return "redirect:/jblog/" + id + "/admin/category";
+		return "redirect:/" + id + "/admin/category";
 	}
 
 	@Auth
-	@RequestMapping(value = "/{id}/admin/category/delete/{no}")
+	@RequestMapping(value = "/admin/category/delete/{no}")
 	public String deleteCategory(@PathVariable("id") String id, @PathVariable("no") Long no) {
 		categoryService.removeCategory(no);
-		return "redirect:/jblog/" + id + "/admin/category";
+		return "redirect:/" + id + "/admin/category";
 	}
 
 	@Auth
-	@RequestMapping(value = "/{id}/admin/write", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/write", method = RequestMethod.GET)
 	public String writeCategory(@PathVariable("id") String id, Model model) {
 		BlogVo blogVo = blogService.getBlog(id);
 		model.addAttribute("blogVo", blogVo);
@@ -134,11 +135,11 @@ public class BlogController {
 	}
 
 	@Auth
-	@RequestMapping(value = "/{id}/admin/write", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/write", method = RequestMethod.POST)
 	public String writeCategory(@PathVariable("id") String id, PostVo postVo, Model model) {
 
 		postService.addPost(postVo);
 
-		return "redirect:/jblog/" + id + "/admin/category";
+		return "redirect:/" + id + "/admin/category";
 	}
 }

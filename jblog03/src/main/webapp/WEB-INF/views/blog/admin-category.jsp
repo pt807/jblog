@@ -30,7 +30,7 @@
 						<c:choose>
 							<c:when test="${vo.postCount == 0}">
 								<td >
-								<a href="${pageContext.request.contextPath}/jblog/${authUser.id }/admin/category/delete/${vo.no }"><img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></a>
+								<a href="${pageContext.request.contextPath}/${authUser.id }/admin/category/delete/${vo.no }"><img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></a>
 								</td>
 							</c:when>
 							<c:otherwise>
@@ -42,7 +42,7 @@
 				</table>
       	
       			<h4 class="n-c">새로운 카테고리 추가</h4>
-		      	<form action="${pageContext.request.contextPath}/jblog/${authUser.id }/admin/category" method="post">
+		      	<form action="${pageContext.request.contextPath}/${authUser.id }/admin/category" method="post">
 		      	<table id="admin-cat-add">
 		      		<tr>
 		      			<td class="t">카테고리명</td>
