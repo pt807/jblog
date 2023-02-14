@@ -1,7 +1,11 @@
 package com.douzone.jblog.vo;
 
+import javax.validation.constraints.NotEmpty;
+
 public class CategoryVo {
 	private Long no;
+	
+	@NotEmpty
 	private String name;
 	private String id;
 	private Long postCount;
