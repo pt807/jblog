@@ -30,7 +30,7 @@ public class GlobalExceptionHandler {
 
 		// 2. 사과페이지( 3.정상종료)
 
-		model.addAttribute("msg", errors.toString());
+		model.addAttribute("msg", "죄송합니다. 잠시 후 다시 시도해 주세요");
 		return "error/exception";
 	}
 
